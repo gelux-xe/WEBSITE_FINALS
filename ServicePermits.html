@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service & Permitting</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
+
+<style>
+* { margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Poppins", sans-serif; 
+}
+body { 
+    color: #fff; 
+    min-height: 100vh; 
+}
+
+.navX-bar {
+  background: rgba(248, 1, 1, 0.3);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 5%;
+  border-radius: 50px;
+  width: 90%;
+  position: fixed;
+  top: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+.navX-logo img { height: 50px; width: auto; object-fit: contain; }
+.navX-links { list-style: none; display: flex; gap: 2rem; }
+.navX-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.navX-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+.navX-links a:hover::after { width: 100%; }
+.navX-links a:hover { color: #ffdcdc; transform: scale(1.05); text-shadow: 0 0 6px rgba(255,255,255,0.6); }
+.navX-toggle {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.navX-toggle:hover { transform: scale(1.2); color: #ffdcdc; }
+
+@media (max-width: 768px) {
+  .navX-toggle { display: block; }
+  .navX-links {
+    display: none;
+    flex-direction: column;
+    background: rgba(146, 8, 9, 0.9);
+    border-radius: 20px;
+    position: absolute;
+    top: 80px;
+    right: 6%;
+    width: 200px;
+    text-align: center;
+    padding: 1rem 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .navX-links.active { display: flex; animation: navXfadeIn 0.4s ease forwards; }
+  .navX-links a { display: block; padding: 0.7rem 0; pointer-events: auto; }
+  @keyframes navXfadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+}
+
+.navX-dropdown { position: relative; }
+.navX-droplink { display: flex; align-items: center; gap: 6px; }
+.navX-arrow {
+  display: inline-block;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  padding: 3px;
+  transform: rotate(45deg);
+  transition: 0.3s ease;
+}
+.navX-dropmenu {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background: rgba(122, 8, 8, 0.95);
+  border-radius: 10px;
+  padding: 10px 0;
+  width: 200px;
+  list-style: none;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  z-index: 200;
+}
+.navX-dropmenu li a { display: block; padding: 10px 20px; text-decoration: none; color: white; transition: 0.3s; }
+.navX-dropmenu li a:hover { transform: translateX(5px); }
+.navX-dropdown:hover .navX-dropmenu { display: block; }
+.navX-dropdown:hover .navX-arrow { transform: rotate(225deg); }
+@media (max-width: 768px) { .navX-dropmenu { position: static; width: 100%; background: rgba(146, 8, 9, 0.9); box-shadow: none; } }
+
+/* SERVICES SECTION */
+.section-services {
+  padding-top: 110px;
+  padding-bottom: 120px;
+  background: url('ss1.gif') no-repeat center center/cover;
+  backdrop-filter: blur(5px);
+  background-size: cover;
+  color: #fff;
+}
+.section-services .header-section { margin-bottom: 35px; }
+.section-services .header-section .title {
+  position: relative;
+  margin-bottom: 40px;
+  padding-bottom: 25px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: clamp(24px, 5vw, 36px);
+}
+.section-services .header-section .title:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 1px;
+  background-color: #f70037;
+}
+.section-services .header-section .title:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 45px;
+  height: 3px;
+  background-color: #f70037;
+}
+.section-services .header-section .title span { color: #ff0022; }
+.section-services .header-section .description { color: #ffffff; font-size: clamp(14px, 2.5vw, 16px); }
+
+.section-services .single-service {
+  margin-top: 40px;
+  background: rgba(97, 6, 6, 0.7);
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  transition: transform 0.3s;
+}
+.section-services .single-service:hover { transform: translateY(-5px); }
+.section-services .single-service .part-1 {
+  padding: 40px 40px 25px;
+  border-bottom: 2px solid #ffffff;
+  text-align: center;
+}
+.section-services .single-service .part-1 i {
+  margin-bottom: 25px;
+  font-size: 50px;
+  color: #f0f0f0;
+}
+.section-services .single-service .part-1 .title {
+  font-size: clamp(16px, 2.5vw, 18px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.8em;
+}
+.section-services .single-service .part-2 {
+  padding: 30px 40px 40px;
+}
+.section-services .single-service .part-2 .description {
+  color: #ffffff;
+  font-size: clamp(12px, 2vw, 14px);
+  line-height: 1.8em;
+}
+.section-services .single-service .part-2 a {
+  color: #fff;
+  font-size: clamp(12px, 2vw, 14px);
+  text-decoration: none;
+}
+.section-services .single-service .part-2 a i { margin-right: 10px; color: #f70037; }
+</style>
+</head>
+
+<body>
+<nav class="navX-bar">
+  <div class="navX-logo"><img src="logoo.png" alt="Tag Team Signs Logo" /></div>
+  <div class="navX-toggle" id="navXmenuToggle">☰</div>
+  <ul class="navX-links">
+    <li><a href="Landing Page.html">Home</a></li>
+    <li class="navX-dropdown">
+      <a href="#" class="navX-droplink">Services <span class="navX-arrow"></span></a>
+      <ul class="navX-dropmenu">
+        <li><a href="Storefront.html">Storefront Signs</a></li>
+        <li><a href="Commercial.html">Commercial Signs</a></li>
+        <li><a href="Monument.html">Monument Signs</a></li>
+        <li><a href="ServicePermits.html">Service & Permitting</a></li>
+      </ul>
+    </li>
+    <li><a href="About.html">About Us</a></li>
+    <li><a href="Work.html">Work</a></li>
+    <li><a href="Contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<script>
+const navXToggle = document.getElementById('navXmenuToggle');
+const navXLinks = document.querySelector('.navX-links');
+navXToggle.addEventListener('click', () => navXLinks.classList.toggle('active'));
+</script>
+
+<section class="section-services">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="header-section">
+          <h2 class="title">Service & <span>Permitting</span></h2>
+          <p class="description">There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fab fa-500px"></i>
+            <h3 class="title">Express delivery innovative Design service</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fab fa-angellist"></i>
+            <h3 class="title">Online chat may refer to any kind communication</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fas fa-award"></i>
+            <h3 class="title">Service provider provide organizations consulting</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fab fa-asymmetrik"></i>
+            <h3 class="title">Express delivery innovative Design service</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fas fa-broadcast-tower"></i>
+            <h3 class="title">Provide solutions and services to end users</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="single-service">
+          <div class="part-1">
+            <i class="fab fa-canadian-maple-leaf"></i>
+            <h3 class="title">This broad term incorporates all IT businesses</h3>
+          </div>
+          <div class="part-2">
+            <p class="description">Express delivery inno service effective logistics solution for delivery of small cargo delivery service.</p>
+            <a href="#"><i class="fas fa-arrow-circle-right"></i>Read More</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
