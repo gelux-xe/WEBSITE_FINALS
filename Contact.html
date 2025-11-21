@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      color: #ffffff;
+      background: url('ss1.gif') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: blur(5px);
+    }
+
+    .navbar {
+      background: rgba(209, 44, 44, 0.3);
+      backdrop-filter: blur(15px);         
+      -webkit-backdrop-filter: blur(10px); 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      border-radius: 50px; 
+      width: 90%;          
+      position: fixed;
+      top: 1.5%;
+      left: 50%;           
+      transform: translateX(-50%); 
+      z-index: 100;
+    }
+
+    .logo img { height: 50px; width: auto; object-fit: contain; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links li { list-style: none; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-links a:hover {
+      color: #ffdcdc;
+      transform: scale(1.05);
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: white;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .menu-toggle:hover { transform: scale(1.2); color: #ffdcdc; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: rgba(146, 8, 9, 0.9);
+        border-radius: 20px;
+        position: absolute;
+        top: 80px;
+        right: 6%;
+        width: 200px;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
+
+      .nav-links.active { display: flex; animation: fadeInMenu 0.4s ease forwards; }
+
+      .nav-links a { display: block; padding: 0.7rem 0; pointer-events: auto; }
+
+      @keyframes fadeInMenu { 
+        from { opacity: 0; transform: translateY(-10px); } 
+        to { opacity: 1; transform: translateY(0); } 
+      }
+    }
+
+    .dropdown { position: relative; }
+
+    .dropdown-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .arrow {
+      display: inline-block;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      padding: 3px;
+      transform: rotate(45deg);
+      transition: 0.3s ease;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 30px;
+      left: 0;
+      background: rgba(209, 44, 44, 0.95);
+      border-radius: 10px;
+      padding: 10px 0;
+      width: 200px;
+      list-style: none;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      z-index: 200;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .dropdown-menu li a:hover { transform: translateX(5px); }
+
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown:hover .arrow { transform: rotate(225deg); }
+
+    @media (max-width: 768px) {
+      .dropdown-menu {
+        position: static;
+        width: 100%;
+        background: rgba(146, 8, 9, 0.9);
+        box-shadow: none;
+      }
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-top: 130px;
+    }
+
+    h1 {
+      color: #fff;
+      margin-bottom: 15px;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    form {
+      background: rgba(121, 44, 44, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: white;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      background: rgba(255, 255, 255, 0.8);
+      color: black;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: #5c1919;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #631515;
+    }
+
+    .contact-info {
+      text-align: center;
+      max-width: 500px;
+      color: #fff;
+      margin-bottom: 50px;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    .contact-info img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo"><img src="logoo.png" alt="Tag Team Signs Logo" /></div>
+    <div class="menu-toggle" id="menuToggle">☰</div>
+    <ul class="nav-links">
+      <li><a href="Landing Page.html">Home</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-link">Services <span class="arrow"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="Storefront.html">Storefront Signs</a></li>
+          <li><a href="Commercial.html">Commercial Signs</a></li>
+          <li><a href="Monument.html">Monument Signs</a></li>
+          <li><a href="ServicePermits.html">Service & Permitting</a></li>
+        </ul>
+      </li>
+      <li><a href="About.html">About Us</a></li>
+      <li><a href="Work.html">Work</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>GET IN TOUCH</h1>
+
+    <form action="#" method="post">
+      <label for="name">Enter Your Name:</label>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+
+      <label for="email">Enter Your Email:</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <label for="subject">Enter Your Subject:</label>
+      <input type="text" id="subject" name="subject" placeholder="Subject" required>
+
+      <label for="message">Enter Your Message:</label>
+      <textarea id="message" name="message" placeholder="Message" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div class="contact-info">
+      <p>We can't wait to hear from you</p>
+      <img src="logoo.png" alt="TAGTEAMSIGNS Logo">
+      <p>signs@tagteamsigns.com</p>
+      <p>623-875-8077</p>
+    </div>
+  </main>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+  </script>
+
+</body>
+</html>
