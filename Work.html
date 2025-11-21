@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Our Work - Tag Team Signs</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif; }
+  body { margin-bottom: 120px; min-height: 100vh; -webkit-font-smoothing: antialiased; color: #000; position: relative; }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: url('ss1.gif') no-repeat center center;
+    background-size: cover;
+    transform: scale(1.1);
+    filter: blur(8px) brightness(0.7);
+    z-index: -1;
+  }
+
+  .navContainer {
+    background: rgba(209, 44, 44, 0.3);
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    border-radius: 50px;
+    width: 90%;
+    position: fixed;
+    top: 1.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+  }
+  .navLogo img { height: 50px; width: auto; object-fit: contain; }
+  .navMenu { list-style: none; display: flex; gap: 2rem; }
+  .navMenu li { list-style: none; }
+  .navMenu a {
+    text-decoration: none; color: white; font-weight: 500; position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .navMenu a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px; left: 0; width: 0; height: 2px;
+    background: white; border-radius: 2px; transition: width 0.3s ease;
+  }
+  .navMenu a:hover::after { width: 100%; }
+  .navMenu a:hover { color: #ffdcdc; transform: scale(1.05); text-shadow: 0 0 6px rgba(255,255,255,0.6); }
+  .navToggle { display: none; font-size: 2rem; cursor: pointer; color: white; transition: transform 0.3s ease, color 0.3s ease; }
+  .navToggle:hover { transform: scale(1.2); color: #ffdcdc; }
+  @media (max-width: 768px) {
+    .navToggle { display: block; }
+    .navMenu { display: none; flex-direction: column; background: rgba(146,8,9,0.9); border-radius: 20px; position: absolute; top: 80px; right: 6%; width: 200px; text-align: center; padding: 1rem 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .navMenu.active { display: flex; animation: fadeInMenu 0.4s ease forwards; }
+    .navMenu a { display: block; padding: 0.7rem 0; pointer-events: auto; }
+    @keyframes fadeInMenu { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  }
+  .navDropdown { position: relative; }
+  .navDropdownLink { display: flex; align-items: center; gap: 6px; }
+  .navArrow { display: inline-block; border: solid white; border-width: 0 2px 2px 0; padding: 3px; transform: rotate(45deg); transition: 0.3s ease; }
+  .navDropdownMenu {
+    display: none; position: absolute; top: 30px; left: 0;
+    background: rgba(209, 44, 44, 0.95); border-radius: 10px; padding: 10px 0; width: 200px; list-style: none; box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 200;
+  }
+  .navDropdownMenu li a { display: block; padding: 10px 20px; text-decoration: none; color: white; transition: 0.3s; }
+  .navDropdownMenu li a:hover { transform: translateX(5px); }
+  .navDropdown:hover .navDropdownMenu { display: block; }
+  .navDropdown:hover .navArrow { transform: rotate(225deg); }
+  @media (max-width: 768px) { .navDropdownMenu { position: static; width: 100%; background: rgba(146,8,9,0.9); box-shadow: none; } }
+
+  :root{ --max-width:1100px; --gap:20px; }
+  .work-container{ width:90%; max-width:var(--max-width); margin:100px auto 48px; color:white; }
+  h1{ font-size:50px; margin:5px 0 6px; text-align:center; font-weight:700; color:white; }
+  .lead, p{ text-align:center; max-width:900px; margin:0 auto 30px; font-size:16px; line-height:1.55; color:#fff; text-shadow:0 0 5px rgba(0,0,0,0.5);}
+  .work-gallery{ display:grid; grid-template-columns: repeat(3,1fr); gap:var(--gap); margin:26px auto 50px; }
+  @media(max-width:900px){ .work-gallery{ grid-template-columns: repeat(2,1fr); } h1{ font-size:40px; } .lead{ font-size:14px; } }
+  @media(max-width:520px){ .work-gallery{ grid-template-columns: 1fr; } }
+  .work-card{ position:relative; overflow:hidden; border-radius:7px; cursor:pointer; min-height:250px; box-shadow:0 6px 18px rgba(18,18,18,0.06); }
+  .work-card img{ display:block; width:100%; height:100%; object-fit:cover; transition: transform 350ms cubic-bezier(.2,.9,.3,1), filter 350ms ease, opacity 350ms ease; transform: translateX(0) scale(1); filter: blur(0px); }
+  .work-card:hover img:not(.active){ transform: scale(1.03); }
+  .work-overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:18px; pointer-events:none; opacity:0; transform: translateY(6px); transition: opacity 260ms ease, transform 260ms ease; }
+  .work-label{ color:white; padding:10px 15px; border-radius:5px; font-weight:600; font-size:22px; text-align:center; max-width:90%; text-shadow:0 0 6px rgba(0,0,0,0.7); }
+  .work-card.active img{ transform: translateX(18px) scale(1.03); filter: blur(4px) brightness(0.7); }
+  .work-card.active .work-overlay{ opacity:1; transform: translateY(0); pointer-events:auto; }
+  .work-mission{ padding:5px 0 10px; background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)); }
+  .work-mission .work-container{ text-align:center; }
+  .work-mission p{ max-width:900px; margin:12px auto 0; color:#fff; line-height:1.6; text-shadow:0 0 6px rgba(0,0,0,0.7);}
+  .work-card:focus{ outline:3px solid rgba(17,24,39,0.08); outline-offset:4px; }
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 1s ease-out, transform 0.2s ease-out; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav class="navContainer">
+  <div class="navLogo"><img src="logoo.png" alt="Tag Team Signs Logo" /></div>
+  <div class="navToggle" id="menuToggle">☰</div>
+  <ul class="navMenu">
+    <li><a href="Landing Page.html">Home</a></li>
+    <li class="navDropdown">
+      <a href="#" class="navDropdownLink">Services <span class="navArrow"></span></a>
+      <ul class="navDropdownMenu">
+        <li><a href="Storefront.html">Storefront Signs</a></li>
+        <li><a href="Commercial.html">Commercial Signs</a></li>
+        <li><a href="Monument.html">Monument Signs</a></li>
+        <li><a href="ServicePermits.html">Service & Permitting</a></li>
+      </ul>
+    </li>
+    <li><a href="About.html">About Us</a></li>
+    <li><a href="Work.html">Work</a></li>
+    <li><a href="Contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="work-container fade-in">
+  <h1>OUR WORK</h1>
+  <p class="lead">
+    Discover how TagTeamSigns is your best resource for creative, quality sign solutions.
+    Our highly trained staff is committed to give you exceptional customer service.
+    From start to finish, you'll see how we make the most out of the latest technologies to
+    design, create and install virtually any type of sign. We streamline the sign buying process
+    for you from Concept to Completion.
+  </p>
+  <div class="work-gallery" id="gallery">
+    <div class="work-card" tabindex="0" data-name="azWHOLEistic - Phoenix, AZ">
+      <img src="wm1.png" alt="Front Lobby Sign">
+      <div class="work-overlay"><div class="work-label">azWHOLEistic - Phoenix, AZ</div></div>
+    </div>
+    <div class="work-card" tabindex="0" data-name="Arizona Crown Center - Prescott, AZ">
+      <img src="wm2.png" alt="Channel Letters">
+      <div class="work-overlay"><div class="work-label">Arizona Crown Center - Prescott, AZ</div></div>
+    </div>
+    <div class="work-card" tabindex="0" data-name="Burns Martial Arts - Phoenix, AZ">
+      <img src="wm3.png" alt="Vehicle Wrap">
+      <div class="work-overlay"><div class="work-label">Burns Martial Arts - Phoenix, AZ</div></div>
+    </div>
+    <div class="work-card" tabindex="0" data-name="El Dorado Restaurant - Glendale, AZ">
+      <img src="wm4.png" alt="Dimensional Logo">
+      <div class="work-overlay"><div class="work-label">El Dorado Restaurant - Glendale, AZ</div></div>
+    </div>
+    <div class="work-card" tabindex="0" data-name="Crepella Crepes - Avondale, AZ">
+      <img src="wm5.png" alt="Acrylic Plaque">
+      <div class="work-overlay"><div class="work-label">Crepella Crepes - Avondale, AZ</div></div>
+    </div>
+    <div class="work-card" tabindex="0" data-name="Rancheros Restaurant - Buckeye, AZ">
+      <img src="wm6.png" alt="Monument Sign">
+      <div class="work-overlay"><div class="work-label">Rancheros Restaurant - Buckeye, AZ</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="work-mission fade-in">
+  <div class="work-container">
+    <h1>OUR MISSION</h1>
+    <p>
+      TagTeamSigns was established in 2001 to make the process of purchasing high quality,
+      cost effective signs available to everyone. When you work with TagTeamSigns you'll find your
+      expectations met or exceeded. You'll find us professional and proactive in all of our practices.
+      You'll be impressed with our efficient systems, use of technology and competitive pricing.
+      From start to finish TagTeamSigns provides complete project management, designed with each
+      client's unique needs in mind. This has made TagTeamSigns one of the most respected sign companies
+      in Arizona for the past 20 years.
+    </p>
+  </div>
+</section>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.querySelector('.navMenu');
+  menuToggle.addEventListener('click', () => navMenu.classList.toggle('active'));
+
+  (function(){
+    const gallery = document.getElementById('gallery');
+    const cards = gallery.querySelectorAll('.work-card');
+
+    cards.forEach(card=>{
+      const name = card.dataset.name || card.querySelector('img')?.alt || 'Image';
+      const label = card.querySelector('.work-label');
+      if(label) label.textContent = name;
+    });
+
+    gallery.addEventListener('click', (e)=>{
+      const card = e.target.closest('.work-card');
+      if(!card) return;
+      const isActive = card.classList.contains('active');
+      cards.forEach(c=> c.classList.remove('active'));
+      if(!isActive) card.classList.add('active');
+    });
+
+    cards.forEach(card=>{
+      card.addEventListener('keydown', (ev)=>{
+        if(ev.key === 'Enter' || ev.key === ' '){
+          ev.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    document.addEventListener('click', (evt)=>{
+      if(!evt.target.closest('#gallery')){
+        cards.forEach(c=> c.classList.remove('active'));
+      }
+    });
+
+    document.addEventListener('keydown', (ev)=>{
+      if(ev.key === 'Escape'){
+        cards.forEach(c=> c.classList.remove('active'));
+      }
+    });
+  })();
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+  });
+</script>
+
+</body>
+</html>
